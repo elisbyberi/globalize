@@ -16,6 +16,10 @@ define([
  *
  * @cldr [Cldr instance].
  *
+ * @options [Object]:
+ * - minimumIntegerDigits: [Number] 
+ * - minimumFractionDigits, maximumFractionDigits: [Number] 
+ *
  * Return the formatted number.
  * ref: http://www.unicode.org/reports/tr35/tr35-numbers.html
  */

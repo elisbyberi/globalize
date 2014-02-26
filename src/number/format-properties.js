@@ -11,6 +11,9 @@ define([
  *
  * @cldr [Cldr instance].
  *
+ * @options [Object]:
+ * See number/format for more info.
+ *
  * Return the formatted number.
  * ref: http://www.unicode.org/reports/tr35/tr35-numbers.html
  */
@@ -70,6 +73,13 @@ return function( pattern, cldr, options ) {
 		throw new Error( "Padding not implemented" );
 	}
 
+	// Options sanity check.
+	minimumFractionDigits = options.minimumFractionDigits || minimumFractionDigits;
+	maximumFractionDigits = options.maximumFractionDigits || maximumFractionDigits;
+	if ( minimumFractionDigits > maximumFractionDigits ) {
+		maximumFractionDigits = minimumFractionDigits;
+	}
+
 	// Return:
 	// 0: @prefix String
 	// 1: @padding Array [ <character>, <count> ] TODO
@@ -81,7 +91,7 @@ return function( pattern, cldr, options ) {
 	return [
 		prefix,
 		padding,
-		minimumIntegerDigits,
+		options.minimumIntegerDigits || minimumIntegerDigits,
 		minimumFractionDigits,
 		maximumFractionDigits,
 		roundIncrement,
